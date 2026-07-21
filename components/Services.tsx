@@ -12,15 +12,19 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section className="mx-auto max-w-container px-6 py-28 md:px-10 md:py-40">
+    <section
+      id="services"
+      className="mx-auto max-w-container px-6 py-28 md:px-10 md:py-40"
+    >
       <Reveal className="max-w-3xl">
         <p className="eyebrow mb-6">( What we do )</p>
-        <h2 className="font-display text-5xl leading-[0.95] tracking-tightest text-bone md:text-7xl">
+        <h2 className="font-display text-5xl uppercase leading-[0.9] tracking-tightest text-bone md:text-7xl">
           Full-stack engineering.
         </h2>
       </Reveal>
 
-      <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-faint bg-faint sm:grid-cols-2 lg:grid-cols-3">
+      {/* Hairline grid, square corners — the gap-px trick draws the rules */}
+      <div className="mt-20 grid gap-px border border-faint bg-faint sm:grid-cols-2 lg:grid-cols-3">
         {SERVICES.map((service, i) => (
           <Reveal
             key={service.title}

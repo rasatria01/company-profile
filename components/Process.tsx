@@ -22,11 +22,11 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <section className="border-y border-faint bg-surface/40">
+    <section id="process" className="border-y border-faint bg-surface/40">
       <div className="mx-auto max-w-container px-6 py-28 md:px-10 md:py-40">
         <Reveal className="mb-20 max-w-2xl">
           <p className="eyebrow mb-6">( The approach )</p>
-          <h2 className="font-display text-5xl leading-[0.95] tracking-tightest text-bone md:text-7xl">
+          <h2 className="font-display text-5xl uppercase leading-[0.9] tracking-tightest text-bone md:text-7xl">
             How we ship.
           </h2>
         </Reveal>
@@ -36,9 +36,9 @@ export default function Process() {
             <Reveal
               key={step.title}
               delay={(i % 2) * 0.1}
-              className="flex gap-6 border-t border-faint pt-8"
+              className="flex gap-6 border-t-2 border-faint pt-8"
             >
-              <span className="font-display text-2xl text-crimson">
+              <span className="font-display text-5xl leading-none text-crimson">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>

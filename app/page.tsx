@@ -4,6 +4,7 @@ import LetsBuild from "@/components/LetsBuild";
 import Stats from "@/components/Stats";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
+import Work from "@/components/Work";
 import Reveal from "@/components/Reveal";
 
 const TICKER = [
@@ -17,17 +18,55 @@ const TICKER = [
   "CI/CD",
 ];
 
+const FOOTER_PAGES = [
+  { label: "Home", href: "#top" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#work" },
+  { label: "Process", href: "#process" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+// TODO: point these at real service pages once they exist.
+const FOOTER_SERVICES = [
+  "Web Platforms",
+  "Mobile Apps",
+  "Backend & APIs",
+  "Cloud & DevOps",
+  "UI/UX Design",
+  "Team Augmentation",
+];
+
+function Ticker() {
+  return (
+    <div className="border-y border-faint py-8">
+      <Marquee duration={35} reverse>
+        {TICKER.map((word) => (
+          <span
+            key={word}
+            className="flex items-center font-mono text-sm uppercase tracking-[0.2em] text-muted"
+          >
+            {word}
+            <span className="tick-star">&#10022;</span>
+          </span>
+        ))}
+      </Marquee>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
-    <main>
+    <main id="top">
       <Navbar />
 
       {/* ---------------------------------------------------------------- HERO */}
       <section className="relative flex min-h-screen flex-col justify-center px-6 pt-24 md:px-10">
         <div className="mx-auto w-full max-w-container">
-          <p className="eyebrow mb-8">Software House</p>
-          <h1 className="max-w-[15ch] font-display text-[13vw] font-medium leading-[0.9] tracking-tightest text-bone md:text-[8.5vw]">
-            We build software that ships.
+          <p className="eyebrow mb-8">( Software House )</p>
+          <h1 className="max-w-[14ch] font-display text-[13vw] font-medium uppercase leading-[0.85] tracking-tightest text-bone md:text-[8.5vw]">
+            We build software that{" "}
+            <span className="text-crimson">ships.</span>
           </h1>
           <p className="mt-8 max-w-xl text-base leading-relaxed text-muted md:text-lg">
             Project33 designs and engineers web platforms, mobile apps, and the
@@ -36,16 +75,10 @@ export default function Home() {
           </p>
 
           <div className="mt-12 flex flex-wrap items-center gap-4">
-            <a
-              href="#"
-              className="rounded-full bg-bone px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-ink transition-opacity hover:opacity-80"
-            >
+            <a href="#contact" className="btn">
               Book consultation
             </a>
-            <a
-              href="#"
-              className="rounded-full border border-bone/20 px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-bone transition-colors hover:bg-bone hover:text-ink"
-            >
+            <a href="#services" className="btn-ghost">
               View services
             </a>
           </div>
@@ -59,8 +92,14 @@ export default function Home() {
       {/* --------------------------------------------- "LET'S BUILD" SCROLL MOMENT */}
       <LetsBuild />
 
+      {/* Stack ticker lands right out of the blast — the calm after the boom */}
+      <Ticker />
+
       {/* -------------------------------------------------------------- INTRO + STATS */}
-      <section className="mx-auto max-w-container px-6 py-28 md:px-10 md:py-40">
+      <section
+        id="about"
+        className="mx-auto max-w-container px-6 py-28 md:px-10 md:py-40"
+      >
         <Reveal className="max-w-4xl">
           <p className="eyebrow mb-6">( Who we are )</p>
           <p className="font-display text-3xl leading-tight tracking-tightest text-bone md:text-5xl">
@@ -77,56 +116,126 @@ export default function Home() {
 
       <Services />
       <Process />
+      <Work />
+
+      {/* -------------------------------------------------------- TESTIMONIAL */}
+      <section className="border-y border-faint bg-surface/40">
+        <div className="mx-auto max-w-container px-6 py-28 md:px-10 md:py-40">
+          <Reveal className="max-w-5xl">
+            <figure>
+              <span
+                aria-hidden="true"
+                className="block font-display text-8xl leading-[0.5] text-crimson"
+              >
+                &ldquo;
+              </span>
+              {/* TODO: replace with a real, attributable client quote. */}
+              <blockquote className="mt-6 font-display text-3xl leading-tight tracking-tightest text-bone md:text-5xl">
+                They didn&rsquo;t just hand us a repo — they built the system our
+                business actually runs on.
+              </blockquote>
+              <figcaption className="mt-10 flex items-center gap-4 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+                <span className="h-px w-12 bg-crimson" />
+                Client Name, Role &mdash; Company
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
 
       {/* --------------------------------------------------------------- CTA */}
-      <section className="mx-auto max-w-container px-6 py-32 text-center md:px-10 md:py-48">
+      <section
+        id="contact"
+        className="mx-auto max-w-container px-6 py-32 text-center md:px-10 md:py-48"
+      >
         <Reveal>
-          <p className="eyebrow mb-8">Start the conversation</p>
-          <h2 className="mx-auto max-w-[16ch] font-display text-6xl leading-[0.95] tracking-tightest text-bone md:text-8xl">
+          <p className="eyebrow mb-8">( Start the conversation )</p>
+          <h2 className="mx-auto max-w-[16ch] font-display text-6xl uppercase leading-[0.9] tracking-tightest text-bone md:text-8xl">
             Let&rsquo;s build your next system.
           </h2>
-          <a
-            href="#"
-            className="mt-12 inline-block rounded-full bg-crimson px-8 py-4 font-mono text-xs uppercase tracking-[0.15em] text-ink transition-opacity hover:opacity-80"
-          >
-            Book consultation
-          </a>
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <a href="mailto:hello@project33.dev" className="btn">
+              Book consultation
+            </a>
+            <a href="#services" className="btn-ghost">
+              View services
+            </a>
+          </div>
         </Reveal>
       </section>
 
-      {/* --------------------------------------------------------- TICKER MARQUEE */}
-      <div className="border-t border-faint py-8">
-        <Marquee duration={35} reverse>
-          {TICKER.map((word) => (
-            <span
-              key={word}
-              className="flex items-center font-mono text-sm uppercase tracking-[0.2em] text-muted"
-            >
-              {word}
-              <span className="tick-star">&#10022;</span>
-            </span>
-          ))}
-        </Marquee>
-      </div>
+      <Ticker />
 
       {/* --------------------------------------------------------------- FOOTER */}
-      <footer className="border-t border-faint">
-        <div className="mx-auto flex max-w-container flex-col gap-10 px-6 py-16 md:flex-row md:items-end md:justify-between md:px-10">
-          <div className="max-w-sm">
+      <footer>
+        <div className="mx-auto grid max-w-container gap-12 px-6 py-20 md:grid-cols-4 md:px-10">
+          <div className="md:col-span-1">
             <a
-              href="#"
-              className="font-display text-2xl font-semibold tracking-tightest text-bone"
+              href="#top"
+              className="font-display text-2xl font-semibold uppercase tracking-tightest text-bone"
             >
               Project<span className="text-crimson">33</span>
             </a>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
               A software house building web platforms, mobile apps, and backend
               systems for teams that need to ship.
             </p>
           </div>
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-muted">
-            &copy; {new Date().getFullYear()} Project33. All rights reserved.
-          </p>
+
+          <nav aria-label="Pages">
+            <h2 className="eyebrow mb-6">Pages</h2>
+            <ul className="space-y-3">
+              {FOOTER_PAGES.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-sm text-muted transition-colors hover:text-crimson"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Services">
+            <h2 className="eyebrow mb-6">Services</h2>
+            <ul className="space-y-3">
+              {FOOTER_SERVICES.map((item) => (
+                <li key={item}>
+                  <a
+                    href="#services"
+                    className="text-sm text-muted transition-colors hover:text-crimson"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <h2 className="eyebrow mb-6">Contact</h2>
+            {/* TODO: replace with your real contact details. */}
+            <ul className="space-y-3 text-sm text-muted">
+              <li>
+                <a
+                  href="mailto:hello@project33.dev"
+                  className="transition-colors hover:text-crimson"
+                >
+                  hello@project33.dev
+                </a>
+              </li>
+              <li>Jakarta, Indonesia</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-faint">
+          <div className="mx-auto flex max-w-container flex-col gap-3 px-6 py-8 font-mono text-xs uppercase tracking-[0.15em] text-muted md:flex-row md:items-center md:justify-between md:px-10">
+            <p>&copy; {new Date().getFullYear()} Project33. All rights reserved.</p>
+            <p>Built to ship &mdash; not to sit in a deck.</p>
+          </div>
         </div>
       </footer>
     </main>

@@ -11,9 +11,34 @@ oversized display type, and a scroll-driven signature moment:
 - **Seamless infinite marquees**, pure CSS, reusable (`components/Marquee.tsx`)
 - **Scroll-triggered count-up stats** (`components/Stats.tsx`)
 - **Reusable scroll-reveal wrapper** (`components/Reveal.tsx`)
-- A fixed navbar, hero, services grid, numbered process section, CTA, and footer
+- **Case-study rows that invert to solid crimson on hover** (`components/Work.tsx`)
+- A fixed navbar, hero, services grid, numbered process, work, testimonial,
+  CTA, and a four-column footer
 
 Reduced-motion is respected throughout, and the layout is responsive down to mobile.
+
+## Page flow
+
+Hero → "LET'S / BUILD" moment → stack ticker → about + stats → services →
+process → work → testimonial → CTA → ticker → footer.
+
+Nav links are real in-page anchors (`#services`, `#work`, `#process`, `#about`,
+`#contact`); `[id] { scroll-margin-top }` in `globals.css` keeps targets clear of
+the fixed header. The mobile menu is a native `<details>` disclosure — no JS,
+and Esc/keyboard behaviour comes free from the platform.
+
+## Bold-rebel rules
+
+The visual register is brutalist, not corporate-soft. If you add UI, follow it:
+
+- **Square corners.** No `rounded-*` anywhere.
+- **Hard invert on hover**, not opacity fades — `hover:bg-crimson` + `group-hover:text-ink`.
+- **Uppercase display type** for section headings, `tracking-tightest`.
+- **Hairline grids** over card shadows (`gap-px` on a `bg-faint` parent draws the rules).
+- Use the `.btn` / `.btn-ghost` classes in `globals.css` rather than re-rolling button utilities.
+
+Black on `crimson` is 5.6:1, so inverted rows stay AA. White on `crimson` is 3.8:1
+and fails — never put `text-bone` on a crimson fill.
 
 ## Getting started
 
@@ -88,7 +113,9 @@ Everything marked with a `TODO:` comment is placeholder content. Start here:
 - **Brand name** — search the project for `Project33` and replace it.
 - **Palette** — edit the `colors` in `tailwind.config.ts` (see [Theme](#theme)).
 - **Fonts** — swap the three `next/font/google` imports in `app/layout.tsx`.
-- **Copy & sections** — the arrays at the top of `Stats.tsx`, `Services.tsx`, `Process.tsx`, and `app/page.tsx`.
+- **Copy & sections** — the arrays at the top of `Stats.tsx`, `Services.tsx`, `Process.tsx`, `Work.tsx`, and `app/page.tsx`.
+- **Case studies** — `WORK` in `Work.tsx` is placeholder; the rows link to `#` until real project pages exist.
+- **Testimonial & contact details** — placeholders in `app/page.tsx`, marked `TODO`.
 - **Metadata / SEO** — `metadata` in `app/layout.tsx`.
 
 > Editing `tailwind.config.ts` while the dev server is running can leave a stale

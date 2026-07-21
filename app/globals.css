@@ -22,6 +22,17 @@
     color: theme("colors.ink");
   }
 
+  /* Keyboard focus must always be visible — never remove this */
+  :focus-visible {
+    outline: 2px solid theme("colors.crimson");
+    outline-offset: 3px;
+  }
+
+  /* Anchor targets clear the fixed header instead of hiding under it */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
   /* Thin, quiet scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
@@ -45,6 +56,24 @@
   .tick-star {
     @apply mx-6 text-crimson;
   }
+
+  /* Buttons: hard edges, hard invert. No soft pills anywhere on this site. */
+  .btn {
+    @apply inline-block border-2 border-crimson bg-crimson px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-ink transition-colors duration-200 hover:border-bone hover:bg-bone;
+  }
+
+  .btn-ghost {
+    @apply inline-block border-2 border-bone px-7 py-3 font-mono text-xs uppercase tracking-[0.15em] text-bone transition-colors duration-200 hover:bg-bone hover:text-ink;
+  }
+}
+
+/* Mobile nav disclosure — strip the native triangle, keep the semantics */
+.nav-toggle > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.nav-toggle > summary::-webkit-details-marker {
+  display: none;
 }
 
 /* ----------------------------------------------------------------------
