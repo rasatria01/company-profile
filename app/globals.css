@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    /* Lenis drives scrolling in JS; keep native smooth off to avoid conflicts */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-ink text-bone font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: theme("colors.crimson");
+    color: theme("colors.ink");
+  }
+
+  /* Thin, quiet scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme("colors.ink");
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  /* Eyebrow label used above section headings — the "( label )" motif */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.25em] text-muted;
+  }
+
+  /* Ticker separator star */
+  .tick-star {
+    @apply mx-6 text-crimson;
+  }
+}
+
+/* ----------------------------------------------------------------------
+   Infinite marquee engine
+   Two identical groups sit side by side; translating the track by -50%
+   lands the second group exactly where the first began → seamless loop.
+---------------------------------------------------------------------- */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 40s) linear infinite;
+}
+
+.marquee__track--reverse {
+  animation-direction: reverse;
+}
+
+.marquee__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ----------------------------------------------------------------------
+   Accessibility: honour reduced-motion by parking every animation
+---------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ----------------------------------------------------------------------
+   "Let's build" scroll moment — all motion lives in LetsBuild.tsx (GSAP)
+---------------------------------------------------------------------- */
